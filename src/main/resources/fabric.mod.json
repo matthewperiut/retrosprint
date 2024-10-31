@@ -23,6 +23,9 @@
       "com.matthewperiut.babric_sprint.stapi.KeybindListener"
     ],
     "stationapi:event_bus_server": [
+    ],
+    "unitweaks:event_bus": [
+      "com.matthewperiut.babric_sprint.UnitweaksFOVCompat"
     ]
   },
   "mixins": [
