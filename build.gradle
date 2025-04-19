@@ -1,6 +1,6 @@
 plugins {
-	id 'fabric-loom' version '1.8.10'
-	id 'babric-loom-extension' version '1.8.8'
+	id 'fabric-loom' version '1.9.2'
+	id 'babric-loom-extension' version '1.9.2'
 	id 'maven-publish'
 }
 
@@ -88,20 +88,9 @@ dependencies {
 	}
 	modImplementation("net.glasslauncher.mods:GlassConfigAPI:${project.gcapi_version}") { transitive false }
 
-	// API Extensions
-	modImplementation("com.github.matthewperiut:spc-babric:${spc_version}") { transitive false }
-	modImplementation("maven.modrinth:bh-creative:${project.bhcreative_version}") { transitive false }
-	//modImplementation ("maven.modrinth:mojangfix-stationapi-edition:${project.mojang_fix_stapi_version}") { transitive false }
-
-	// Runtime Convenience
-	modRuntimeOnly "com.github.GeyserMC:MCAuthLib:d9d773e5d50327c33898c65cd545a4f6ef3ba1b5" // needed for mojang fix
-	//modRuntimeOnly ("maven.modrinth:mojangfix-stationapi-edition:${project.mojang_fix_stapi_version}") { transitive false }
-	modRuntimeOnly ("maven.modrinth:thirdpersonfix-babric:${project.thirdpersonfix_version}") { transitive false }
-	modRuntimeOnly ("maven.modrinth:modmenu-beta:${project.modmenu_version}") { transitive false }
-	modRuntimeOnly ("net.glasslauncher:HowManyItems-Fabric-Unofficial:${project.howmanyitems_version}") {transitive false }
-	modRuntimeOnly ("com.github.matthewperiut:stapi-fast-intro:17a7ed0dc4") { transitive false }
-
+	modImplementation("maven.modrinth:retrocommands:${retrocommands_version}") { transitive false }
 	modImplementation ("maven.modrinth:unitweaks:${project.unitweaks_version}")  { transitive false }
+	modImplementation ("maven.modrinth:retroauth:${project.retroauth_version}")  { transitive false }
 }
 
 processResources {

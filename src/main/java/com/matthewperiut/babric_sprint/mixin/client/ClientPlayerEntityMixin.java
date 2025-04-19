@@ -2,7 +2,7 @@ package com.matthewperiut.babric_sprint.mixin.client;
 
 import com.matthewperiut.babric_sprint.api.EntitySprinting;
 import net.minecraft.block.material.Material;
-import net.minecraft.class_41;
+import net.minecraft.client.input.Input;
 import net.minecraft.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
@@ -25,7 +25,7 @@ abstract public class ClientPlayerEntityMixin extends PlayerEntity implements En
     private float prevMovementForward = 0;
 
     @Shadow
-    public class_41 field_161;
+    public Input input;
 
     @Override
     public void setSprinting(boolean sprinting) {
@@ -55,14 +55,14 @@ abstract public class ClientPlayerEntityMixin extends PlayerEntity implements En
         boolean canSprint = true;
         float threshold = 0.8f;
         // input.movementForward named
-        float movementForward = field_161.field_2533;
+        float movementForward = input.movementForward;
 
         // we come back to this part
         //boolean bl3 = movementForward >= threshold;
         boolean bl3 = prevMovementForward < threshold && movementForward > threshold;
 
         if (this.onGround && movementForward >= threshold && !this.isSprinting() && canSprint /*&& !this.isUsingItem()*/) {
-            if (field_161.field_2534) {
+            if (input.unused) {
                 this.setSprinting(true);
             } else {
                 if (this.sprintStartTicks == 0) {

@@ -27,9 +27,9 @@ public class WorldRendererMixin {
         if (particleName.startsWith("tilecrack_")) {
             int n3 = Integer.parseInt(particleName.substring(particleName.indexOf("_") + 1));
             if (stapi) {
-                this.client.field_2808.method_325(new BlockDustParticleSTAPI(this.world, x, y, z, velocityX, velocityY, velocityZ, Block.BLOCKS[n3], 0, 0));
+                this.client.particleManager.addParticle(new BlockDustParticleSTAPI(this.world, x, y, z, velocityX, velocityY, velocityZ, Block.BLOCKS[n3], 0, 0));
             } else {
-                this.client.field_2808.method_325(new BlockDustParticle(this.world, x, y, z, velocityX, velocityY, velocityZ, Block.BLOCKS[n3], 0, 0));
+                this.client.particleManager.addParticle(new BlockDustParticle(this.world, x, y, z, velocityX, velocityY, velocityZ, Block.BLOCKS[n3], 0, 0));
             }
             ci.cancel();
         }

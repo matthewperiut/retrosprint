@@ -13,12 +13,11 @@
     "server.ServerPlayNetworkHandlerMixin"
   ],
   "client": [
-    "client.Class413Mixin",
-    "client.Class555Mixin",
-    "client.Class555MixinCaptureVar",
     "client.ClientPlayerEntityMixin",
+    "client.GameRendererMixin",
+    "client.GameRendererMixinCaptureVar",
+    "client.KeyboardInputMixin",
     "client.MultiplayerClientPlayerEntityMixin",
-    "client.PlayerEntityRendererMixin",
     "client.WorldRendererMixin"
   ],
   "injectors": {

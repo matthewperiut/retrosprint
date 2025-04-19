@@ -1,8 +1,8 @@
 package com.matthewperiut.babric_sprint.mixin.client;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.class_555;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.entity.LivingEntity;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
@@ -17,26 +17,26 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import static com.matthewperiut.babric_sprint.BabricSprint.lastMovementFovMultiplier;
 import static com.matthewperiut.babric_sprint.BabricSprint.movementFovMultiplier;
 
-@Mixin(value = class_555.class, priority = 900)
-public abstract class Class555Mixin {
+@Mixin(value = GameRenderer.class, priority = 900)
+public abstract class GameRendererMixin {
     @Shadow
-    protected abstract float method_1848(float f);
-
-    @Shadow
-    private Minecraft field_2349;
+    protected abstract float getFov(float f);
 
     @Shadow
-    private float field_2350;
+    private Minecraft client;
+
+    @Shadow
+    private float viewDistance;
 
 
-    @Redirect(method = "method_1840", at = @At(value = "INVOKE", target = "Lnet/minecraft/class_555;method_1848(F)F"), require = 0)
-    public float redirectToCustomFov(class_555 instance, float value) {
+    @Redirect(method = "renderWorld", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/GameRenderer;getFov(F)F"), require = 0)
+    public float redirectToCustomFov(GameRenderer instance, float value) {
         return getFovMultiplier(value, false);
     }
 
     @Unique
     public float getFovMultiplier(float f, boolean isHand) {
-        LivingEntity entity = this.field_2349.field_2807;
+        LivingEntity entity = this.client.camera;
         float fov = 70F;
 
         if (isHand) {
@@ -59,11 +59,11 @@ public abstract class Class555Mixin {
         return fov;
     }
 
-    @Inject(method = "method_1845", at = @At(value = "HEAD"))
+    @Inject(method = "renderFirstPersonHand", at = @At(value = "HEAD"))
     public void adjustHandFov(float f, int i, CallbackInfo ci) {
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glLoadIdentity();
-        GLU.gluPerspective(getFovMultiplier(f, true), (float) field_2349.displayWidth / (float) field_2349.displayHeight, 0.05F, field_2350 * 2.0F);
+        GLU.gluPerspective(getFovMultiplier(f, true), (float) client.displayWidth / (float) client.displayHeight, 0.05F, viewDistance * 2.0F);
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
     }
 }

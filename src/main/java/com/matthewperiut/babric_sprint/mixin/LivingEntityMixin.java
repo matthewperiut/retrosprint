@@ -30,7 +30,7 @@ abstract public class LivingEntityMixin extends Entity {
         }
     }
 
-    @Inject(method = "method_944", at = @At("TAIL"), cancellable = true)
+    @Inject(method = "jump", at = @At("TAIL"), cancellable = true)
     void addedSpeedOnSprintJump(CallbackInfo ci) {
         if (((EntitySprinting) (Object) this).isSprinting()) {
             float f = yaw * ((float) Math.PI / 180);
