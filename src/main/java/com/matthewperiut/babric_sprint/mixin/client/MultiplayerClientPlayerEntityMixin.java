@@ -20,7 +20,7 @@ public class MultiplayerClientPlayerEntityMixin {
     @Unique
     boolean wasSprinting = false;
 
-    @Inject(method = "method_1922", at = @At("HEAD"))
+    @Inject(method = "sendMovement", at = @At("HEAD"))
     void tick(CallbackInfo ci) {
         boolean sprinting = ((EntitySprinting) (Object) this).isSprinting();
         if (sprinting != wasSprinting) {

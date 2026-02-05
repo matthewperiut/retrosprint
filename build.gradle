@@ -1,12 +1,14 @@
 plugins {
-	id 'fabric-loom' version '1.9.2'
-	id 'babric-loom-extension' version '1.9.2'
+	id 'net.fabricmc.fabric-loom-remap' version '1.15.+'
+	id 'ploceus' version '1.15-SNAPSHOT'
 	id 'maven-publish'
 }
+ploceus {
+	setIntermediaryGeneration(2)
+}
 
-sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
 
-archivesBaseName = project.archives_base_name
+
 version = project.mod_version
 group = project.maven_group
 
@@ -14,8 +16,6 @@ loom {
 	mixin {
 		useLegacyMixinAp = true
 	}
-	customMinecraftManifest.set("https://babric.github.io/manifest-polyfill/${minecraft_version}.json")
-	intermediaryUrl.set("https://maven.glass-launcher.net/babric/babric/intermediary/%1\$s/intermediary-%1\$s-v2.jar")
 }
 
 repositories {
@@ -34,9 +34,6 @@ repositories {
 	maven {
 		name = 'Glass Releases'
 		url = 'https://maven.glass-launcher.net/releases'
-	}
-	maven {
-		url = 'https://isoberry.com/maven'
 	}
 	// Used for StationAPI and HowManyItems.
 	maven {
@@ -66,13 +63,23 @@ repositories {
 		}
 	}
 	mavenCentral()
+	maven { url = "https://maven.ornithemc.net/releases" }
+	maven { url = "https://mvn.devos.one/releases" }
+	maven { url = "https://matthewperiut.github.io/repository" }
 }
 
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings "net.glasslauncher:biny:${project.biny_mappings}:v2"
-	modImplementation "babric:fabric-loader:${project.loader_version}"
+	mappings(ploceus.mappings("net.glasslauncher:biny-ornithe:b1.7.3+build.${project.biny_mappings}:mergedv2"))
+
+	clientExceptions ploceus.raven(project.client_raven_build, 'client')
+	serverExceptions ploceus.raven(project.server_raven_build, 'server')
+	clientSignatures ploceus.sparrow(project.client_sparrow_build, 'client')
+	serverSignatures ploceus.sparrow(project.server_sparrow_build, 'server')
+	"clientNests"("net.glasslauncher:biny-nests:b1.7.3-client+build.2")
+	"serverNests"("net.glasslauncher:biny-nests:b1.7.3-server+build.2")
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	implementation "org.slf4j:slf4j-api:1.8.0-beta4"
 	implementation 'org.apache.logging.log4j:log4j-slf4j18-impl:2.17.2'
@@ -81,17 +88,31 @@ dependencies {
 	implementation "blue.endless:jankson:1.2.1"
 	implementation 'com.google.guava:guava:33.2.1-jre'
 
-	modImplementation "net.modificationstation:StationAPI:${project.stapi_version}"
+	modImplementation("net.modificationstation:StationAPI:${project.stapi_version}")
 	implementation(include("me.carleslc:Simple-Yaml:1.8.4"))
-	modImplementation("net.glasslauncher.mods:glass-networking:${project.glass_networking_version}") {
-		transitive false
+	// TODO: babric2ornithe - verify this dependency is available for ornithe
+	// modImplementation("net.glasslauncher.mods:glass-networking:${project.glass_networking_version}") {
+	// transitive false
+	// }
+	modImplementation("net.glasslauncher.mods:GlassConfigAPI:${project.gcapi_version}") {
+		transitive = false
 	}
-	modImplementation("net.glasslauncher.mods:GlassConfigAPI:${project.gcapi_version}") { transitive false }
 
-	modImplementation("maven.modrinth:retrocommands:${retrocommands_version}") { transitive false }
-	modImplementation ("maven.modrinth:unitweaks:${project.unitweaks_version}")  { transitive false }
-	modImplementation ("maven.modrinth:retroauth:${project.retroauth_version}")  { transitive false }
+	modImplementation("com.periut:retrocommands:${project.retrocommands_version}") {
+		transitive = false
+	}
+	// TODO: babric2ornithe - verify this dependency is available for ornithe
+	// modImplementation ("maven.modrinth:unitweaks:${project.unitweaks_version}")  { transitive false }
+	// TODO: babric2ornithe - verify this dependency is available for ornithe
+	// modImplementation ("maven.modrinth:retroauth:${project.retroauth_version}")  { transitive false }
+
+	modImplementation "com.periut:starac:${project.starac_version}"
 }
+// Exclude Legacy Fabric LWJGL 2 wrapper (starac provides LWJGL 3)
+configurations.configureEach {
+	exclude group: 'org.lwjgl.lwjgl'
+}
+
 
 processResources {
 	inputs.property "version", project.version
@@ -102,9 +123,8 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	// Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
-	// Loom also requires J17.
-	it.options.release = 17
+	// Loom requires J21.
+	it.options.release = 21
 }
 
 java {
@@ -116,7 +136,7 @@ java {
 
 jar {
 	from("LICENSE") {
-		rename { "${it}_${project.archivesBaseName}"}
+		rename { "${it}_${project.archives_base_name}"}
 	}
 }
 
