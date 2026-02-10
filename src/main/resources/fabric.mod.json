@@ -1,35 +1,35 @@
 {
   "schemaVersion": 1,
-  "id": "babric_sprint",
+  "id": "retrosprint",
   "version": "${version}",
 
-  "name": "Babric Sprint",
+  "name": "Retro Sprint",
   "description": "Adds sprinting to b1.7.3",
   "authors": [
     "Slainlight"
   ],
 
   "license": "MIT",
-  "icon": "assets/babric_sprint/icon.png",
+  "icon": "assets/retrosprint/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.matthewperiut.babric_sprint.BabricSprint"
+      "com.periut.retrosprint.BabricSprint"
     ],
     "stationapi:event_bus": [
     ],
     "stationapi:event_bus_client": [
-      "com.matthewperiut.babric_sprint.stapi.KeybindListener"
+      "com.periut.retrosprint.stapi.KeybindListener"
     ],
     "stationapi:event_bus_server": [
     ],
     "unitweaks:event_bus": [
-      "com.matthewperiut.babric_sprint.UnitweaksFOVCompat"
+      "com.periut.retrosprint.UnitweaksFOVCompat"
     ]
   },
   "mixins": [
-    "babric_sprint.mixins.json"
+    "retrosprint.mixins.json"
   ],
 
   "depends": {

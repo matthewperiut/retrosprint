@@ -1,9 +1,9 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.matthewperiut.babric_sprint.mixin",
+  "package": "com.periut.retrosprint.mixin",
   "compatibilityLevel": "JAVA_8",
-  "plugin": "com.matthewperiut.babric_sprint.mixin.compat.CompatMixinPlugin",
+  "plugin": "com.periut.retrosprint.mixin.compat.CompatMixinPlugin",
   "mixins": [
     "EntityMixin",
     "LivingEntityMixin",

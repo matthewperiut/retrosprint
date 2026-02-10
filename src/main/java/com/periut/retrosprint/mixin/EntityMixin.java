@@ -1,6 +1,6 @@
-package com.matthewperiut.babric_sprint.mixin;
+package com.periut.retrosprint.mixin;
 
-import com.matthewperiut.babric_sprint.api.EntitySprinting;
+import com.periut.retrosprint.api.EntitySprinting;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.Box;
@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Random;
 
-import static com.matthewperiut.babric_sprint.SprintingConstants.SPRINT_FLAG;
+import static com.periut.retrosprint.SprintingConstants.SPRINT_FLAG;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin implements EntitySprinting {

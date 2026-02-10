@@ -1,4 +1,4 @@
-package com.matthewperiut.babric_sprint.stapi;
+package com.periut.retrosprint.stapi;
 
 import net.mine_diver.unsafeevents.listener.EventListener;
 import net.minecraft.client.option.KeyBinding;

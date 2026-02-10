@@ -1,4 +1,4 @@
-package com.matthewperiut.babric_sprint;
+package com.periut.retrosprint;
 
 public final class SprintingConstants {
     public static final int SPRINT_FLAG = 3;

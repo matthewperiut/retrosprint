@@ -1,6 +1,6 @@
-package com.matthewperiut.babric_sprint.mixin.client;
+package com.periut.retrosprint.mixin.client;
 
-import com.matthewperiut.babric_sprint.api.EntitySprinting;
+import com.periut.retrosprint.api.EntitySprinting;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.input.Input;
 import net.minecraft.entity.player.ClientPlayerEntity;
@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static com.matthewperiut.babric_sprint.SprintingConstants.SPRINT_FLAG;
+import static com.periut.retrosprint.SprintingConstants.SPRINT_FLAG;
 
 @Mixin(ClientPlayerEntity.class)
 abstract public class ClientPlayerEntityMixin extends PlayerEntity implements EntitySprinting {

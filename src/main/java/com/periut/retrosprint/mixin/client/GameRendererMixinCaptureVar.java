@@ -1,6 +1,6 @@
-package com.matthewperiut.babric_sprint.mixin.client;
+package com.periut.retrosprint.mixin.client;
 
-import com.matthewperiut.babric_sprint.api.EntitySprinting;
+import com.periut.retrosprint.api.EntitySprinting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.entity.player.ClientPlayerEntity;
@@ -12,8 +12,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static com.matthewperiut.babric_sprint.BabricSprint.lastMovementFovMultiplier;
-import static com.matthewperiut.babric_sprint.BabricSprint.movementFovMultiplier;
+import static com.periut.retrosprint.BabricSprint.lastMovementFovMultiplier;
+import static com.periut.retrosprint.BabricSprint.movementFovMultiplier;
 
 @Mixin(GameRenderer.class)
 public class GameRendererMixinCaptureVar {

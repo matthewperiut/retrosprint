@@ -1,4 +1,4 @@
-package com.matthewperiut.babric_sprint.mixin.client;
+package com.periut.retrosprint.mixin.client;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -14,8 +14,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static com.matthewperiut.babric_sprint.BabricSprint.lastMovementFovMultiplier;
-import static com.matthewperiut.babric_sprint.BabricSprint.movementFovMultiplier;
+import static com.periut.retrosprint.BabricSprint.lastMovementFovMultiplier;
+import static com.periut.retrosprint.BabricSprint.movementFovMultiplier;
 
 @Mixin(value = GameRenderer.class, priority = 900)
 public abstract class GameRendererMixin {

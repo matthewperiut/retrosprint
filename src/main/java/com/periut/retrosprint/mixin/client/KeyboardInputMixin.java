@@ -1,7 +1,7 @@
-package com.matthewperiut.babric_sprint.mixin.client;
+package com.periut.retrosprint.mixin.client;
 
-import com.matthewperiut.babric_sprint.BabricSprint;
-import com.matthewperiut.babric_sprint.stapi.KeybindHelperStapi;
+import com.periut.retrosprint.BabricSprint;
+import com.periut.retrosprint.stapi.KeybindHelperStapi;
 import net.minecraft.client.input.Input;
 import net.minecraft.client.input.KeyboardInput;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static com.matthewperiut.babric_sprint.BabricSprint.stapi;
+import static com.periut.retrosprint.BabricSprint.stapi;
 
 @Mixin(KeyboardInput.class)
 public class KeyboardInputMixin extends Input {

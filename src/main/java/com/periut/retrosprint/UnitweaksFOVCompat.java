@@ -1,9 +1,4 @@
-package com.matthewperiut.babric_sprint;
-
-import net.mine_diver.unsafeevents.listener.EventListener;
-
-import static com.matthewperiut.babric_sprint.BabricSprint.lastMovementFovMultiplier;
-import static com.matthewperiut.babric_sprint.BabricSprint.movementFovMultiplier;
+package com.periut.retrosprint;
 
 public class UnitweaksFOVCompat {
 //    @EventListener

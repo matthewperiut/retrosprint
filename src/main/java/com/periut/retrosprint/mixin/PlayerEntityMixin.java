@@ -1,6 +1,6 @@
-package com.matthewperiut.babric_sprint.mixin;
+package com.periut.retrosprint.mixin;
 
-import com.matthewperiut.babric_sprint.api.EntitySprinting;
+import com.periut.retrosprint.api.EntitySprinting;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;

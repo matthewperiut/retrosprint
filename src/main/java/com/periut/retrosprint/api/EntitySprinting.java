@@ -1,4 +1,4 @@
-package com.matthewperiut.babric_sprint.api;
+package com.periut.retrosprint.api;
 
 public interface EntitySprinting {
     void setSprinting(boolean sprinting);

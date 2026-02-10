@@ -1,7 +1,7 @@
-package com.matthewperiut.babric_sprint.mixin.client;
+package com.periut.retrosprint.mixin.client;
 
-import com.matthewperiut.babric_sprint.particle.BlockDustParticle;
-import com.matthewperiut.babric_sprint.particle.BlockDustParticleSTAPI;
+import com.periut.retrosprint.particle.BlockDustParticle;
+import com.periut.retrosprint.particle.BlockDustParticleSTAPI;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.WorldRenderer;
@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static com.matthewperiut.babric_sprint.BabricSprint.stapi;
+import static com.periut.retrosprint.BabricSprint.stapi;
 
 @Mixin(WorldRenderer.class)
 public class WorldRendererMixin {

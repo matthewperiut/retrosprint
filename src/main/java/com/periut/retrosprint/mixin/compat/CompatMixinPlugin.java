@@ -1,4 +1,4 @@
-package com.matthewperiut.babric_sprint.mixin.compat;
+package com.periut.retrosprint.mixin.compat;
 
 import net.fabricmc.loader.api.FabricLoader;
 import org.objectweb.asm.tree.ClassNode;

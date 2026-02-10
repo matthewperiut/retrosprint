@@ -1,7 +1,7 @@
-package com.matthewperiut.babric_sprint.mixin.server;
+package com.periut.retrosprint.mixin.server;
 
-import com.matthewperiut.babric_sprint.SprintingConstants;
-import com.matthewperiut.babric_sprint.api.EntitySprinting;
+import com.periut.retrosprint.SprintingConstants;
+import com.periut.retrosprint.api.EntitySprinting;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
 import net.minecraft.server.network.ServerPlayNetworkHandler;

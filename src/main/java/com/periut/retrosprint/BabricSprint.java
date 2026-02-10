@@ -1,4 +1,4 @@
-package com.matthewperiut.babric_sprint;
+package com.periut.retrosprint;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;

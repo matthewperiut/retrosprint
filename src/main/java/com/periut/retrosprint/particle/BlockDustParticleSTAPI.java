@@ -1,4 +1,4 @@
-package com.matthewperiut.babric_sprint.particle;
+package com.periut.retrosprint.particle;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.render.Tessellator;
