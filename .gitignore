@@ -5,6 +5,10 @@ build/
 out/
 classes/
 
+# quilt loom
+
+remappedSrc/
+
 # eclipse
 
 *.launch
@@ -16,6 +20,10 @@ classes/
 *.ipr
 *.iws
 
+# fleet
+
+.fleet/
+
 # vscode
 
 .settings/
@@ -23,6 +31,10 @@ classes/
 bin/
 .classpath
 .project
+
+# eclipse jdt ls
+
+workspace/
 
 # macos
 

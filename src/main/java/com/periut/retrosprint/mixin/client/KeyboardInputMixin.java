@@ -1,6 +1,6 @@
 package com.periut.retrosprint.mixin.client;
 
-import com.periut.retrosprint.BabricSprint;
+import com.periut.retrosprint.RetroSprint;
 import com.periut.retrosprint.stapi.KeybindHelperStapi;
 import net.minecraft.client.input.Input;
 import net.minecraft.client.input.KeyboardInput;
@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static com.periut.retrosprint.BabricSprint.stapi;
+import static com.periut.retrosprint.RetroSprint.stapi;
 
 @Mixin(KeyboardInput.class)
 public class KeyboardInputMixin extends Input {
@@ -26,7 +26,7 @@ public class KeyboardInputMixin extends Input {
 
             }
         } else {
-            if (i == BabricSprint.runKeyCode) {
+            if (i == RetroSprint.runKeyCode) {
                 keys[6] = bl;
             }
         }

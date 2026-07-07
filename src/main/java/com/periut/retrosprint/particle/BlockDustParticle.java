@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 
 public class BlockDustParticle
         extends Particle {
-    private Block block;
+    protected Block block;
     private int colorMultiplier = 0xFFFFFF;
 
     public BlockDustParticle(World world, double x, double y, double z, double g, double h, double i, Block arg2, int j, int k) {

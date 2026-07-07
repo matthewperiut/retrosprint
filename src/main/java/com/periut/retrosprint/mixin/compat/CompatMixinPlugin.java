@@ -11,7 +11,7 @@ import java.util.Set;
 public class CompatMixinPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (mixinClassName.equals("com.matthewperiut.babric_sprint.mixin.client.Class555Mixin")) {
+        if (mixinClassName.equals("com.periut.retrosprint.mixin.client.Class555Mixin")) {
             return !FabricLoader.getInstance().isModLoaded("unitweaks");
         }
         return true;

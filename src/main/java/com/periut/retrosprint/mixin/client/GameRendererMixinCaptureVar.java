@@ -12,8 +12,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static com.periut.retrosprint.BabricSprint.lastMovementFovMultiplier;
-import static com.periut.retrosprint.BabricSprint.movementFovMultiplier;
+import static com.periut.retrosprint.RetroSprint.lastMovementFovMultiplier;
+import static com.periut.retrosprint.RetroSprint.movementFovMultiplier;
 
 @Mixin(GameRenderer.class)
 public class GameRendererMixinCaptureVar {

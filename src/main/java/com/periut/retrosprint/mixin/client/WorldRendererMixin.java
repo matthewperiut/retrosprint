@@ -1,6 +1,7 @@
 package com.periut.retrosprint.mixin.client;
 
 import com.periut.retrosprint.particle.BlockDustParticle;
+import com.periut.retrosprint.particle.BlockDustParticleRetroAPI;
 import com.periut.retrosprint.particle.BlockDustParticleSTAPI;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -12,7 +13,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static com.periut.retrosprint.BabricSprint.stapi;
+import static com.periut.retrosprint.RetroSprint.retroapi;
+import static com.periut.retrosprint.RetroSprint.stapi;
 
 @Mixin(WorldRenderer.class)
 public class WorldRendererMixin {
@@ -27,7 +29,10 @@ public class WorldRendererMixin {
         if (particleName.startsWith("tilecrack_")) {
             int n3 = Integer.parseInt(particleName.substring(particleName.indexOf("_") + 1));
             if (stapi) {
+                // StationAPI is present, so it owns the atlas - let it handle sprite lookup regardless of RetroAPI.
                 this.client.particleManager.addParticle(new BlockDustParticleSTAPI(this.world, x, y, z, velocityX, velocityY, velocityZ, Block.BLOCKS[n3], 0, 0));
+            } else if (retroapi) {
+                this.client.particleManager.addParticle(new BlockDustParticleRetroAPI(this.world, x, y, z, velocityX, velocityY, velocityZ, Block.BLOCKS[n3], 0, 0));
             } else {
                 this.client.particleManager.addParticle(new BlockDustParticle(this.world, x, y, z, velocityX, velocityY, velocityZ, Block.BLOCKS[n3], 0, 0));
             }

@@ -11,7 +11,7 @@ public class KeybindListener {
     @EventListener
     public void registerKeybinds(KeyBindingRegisterEvent event) {
         // Initializing the keybind, the first argument is the translation key and the second is the default keycode
-        sprintKeybind = new KeyBinding("key.babric_sprint.sprint_key", Keyboard.KEY_LCONTROL);
+        sprintKeybind = new KeyBinding("key.retrosprint.sprint_key", Keyboard.KEY_LCONTROL);
 
         // Adding the keybind to the keybindings list
         event.keyBindings.add(sprintKeybind);

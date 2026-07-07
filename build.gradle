@@ -1,16 +1,21 @@
 plugins {
-	id 'net.fabricmc.fabric-loom-remap' version '1.15.+'
-	id 'ploceus' version '1.15-SNAPSHOT'
+	id 'net.fabricmc.fabric-loom-remap' version '1.16.3'
+	id 'ploceus' version '1.16.1'
+	// Also builds a babric variant of the mod (build/libs/<name>-babric.jar) so it can be
+	// shared to babric users too. Run `./gradlew build`; the babric jar appears alongside.
+	id 'com.periut.retroconvert' version "${retroconvert_version}"
 	id 'maven-publish'
 }
+
+base {
+	archivesName = project.archives_base_name
+}
+version = "${project.mod_version}+mc${project.minecraft_version}"
+group = project.maven_group
+
 ploceus {
 	setIntermediaryGeneration(2)
 }
-
-
-
-version = project.mod_version
-group = project.maven_group
 
 loom {
 	mixin {
@@ -77,8 +82,8 @@ dependencies {
 	serverExceptions ploceus.raven(project.server_raven_build, 'server')
 	clientSignatures ploceus.sparrow(project.client_sparrow_build, 'client')
 	serverSignatures ploceus.sparrow(project.server_sparrow_build, 'server')
-	"clientNests"("net.glasslauncher:biny-nests:b1.7.3-client+build.2")
-	"serverNests"("net.glasslauncher:biny-nests:b1.7.3-server+build.2")
+	"clientNests"("net.glasslauncher:biny-nests:b1.7.3-client+build.${project.biny_nests_build}")
+	"serverNests"("net.glasslauncher:biny-nests:b1.7.3-server+build.${project.biny_nests_build}")
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	implementation "org.slf4j:slf4j-api:1.8.0-beta4"
@@ -89,6 +94,7 @@ dependencies {
 	implementation 'com.google.guava:guava:33.2.1-jre'
 
 	modImplementation("net.modificationstation:StationAPI:${project.stapi_version}")
+	modImplementation "com.periut:retroapi:${project.retroapi_version}"
 	implementation(include("me.carleslc:Simple-Yaml:1.8.4"))
 	// TODO: babric2ornithe - verify this dependency is available for ornithe
 	// modImplementation("net.glasslauncher.mods:glass-networking:${project.glass_networking_version}") {
@@ -108,8 +114,11 @@ dependencies {
 
 	modImplementation "com.periut:starac:${project.starac_version}"
 }
-// Exclude Legacy Fabric LWJGL 2 wrapper (starac provides LWJGL 3)
-configurations.configureEach {
+// Exclude the Legacy Fabric LWJGL 2 wrapper at RUNTIME only (starac provides LWJGL 3).
+// It must stay on the compile/minecraft classpath so Condor (Ploceus LVT generator)
+// can resolve org.lwjgl.* classes referenced by b1.7.3 - a blanket exclude here
+// strips LWJGL 2 from minecraftCompileLibraries and crashes LVT generation.
+configurations.matching { it.name.toLowerCase().contains('runtime') }.configureEach {
 	exclude group: 'org.lwjgl.lwjgl'
 }
 
