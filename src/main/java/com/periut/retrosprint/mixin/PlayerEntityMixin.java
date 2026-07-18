@@ -23,7 +23,7 @@ abstract public class PlayerEntityMixin {
             applyKnockback(player, target);
 
             // Optionally: Stop sprinting after the attack
-            ((EntitySprinting) (Object) player).setSprinting(false);
+            //((EntitySprinting) (Object) player).setSprinting(false);
         }
     }
 

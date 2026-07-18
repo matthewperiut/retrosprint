@@ -19,8 +19,12 @@ abstract public class LivingEntityMixin extends Entity {
 
     @Inject(method = "tickMovement", at = @At("HEAD"))
     private void increaseMovementSpeed(CallbackInfo info) {
-        LivingEntity entity = (LivingEntity) (Object) this;
-        if (((EntitySprinting) (Object) entity).isSprinting()) {
+        EntitySprinting sprinting = (EntitySprinting) (Object) this;
+		if (sprinting.isSprinting() && sprinting.isTouchingWater()) {
+			sprinting.setSprinting(false);
+			return;
+		}
+        if (sprinting.isSprinting() && !sprinting.isTouchingWater()) {
 
             if (Math.sqrt(Math.pow(velocityX, 2) + Math.pow(velocityZ, 2)) < 0.25) {
                 float f = yaw * ((float) Math.PI / 180);
