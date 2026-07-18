@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Random;
@@ -58,6 +59,19 @@ public abstract class EntityMixin implements EntitySprinting {
     @Shadow
     public double velocityZ;
 
+	@Shadow
+	public boolean onGround;
+
+	@Shadow
+	public float horizontalSpeed;
+
+	@Shadow
+	public int nextStepSoundDistance;
+
+	private float bufferedStepDistance = 0f;
+	private boolean flushedThisTick = false;
+
+
     @Override
     public void setSprinting(boolean sprinting) {
         setFlag(SPRINT_FLAG, sprinting);
@@ -80,8 +94,35 @@ public abstract class EntityMixin implements EntitySprinting {
 
     }
 
-    @Unique
+    @Override
     public boolean isTouchingWater() {
         return world.isMaterialInBox(this.boundingBox.expand(-0.10000000149011612, -0.4000000059604645, -0.10000000149011612), Material.WATER);
     }
+
+	@Redirect(
+		method = "move",
+		at = @At(
+			value = "FIELD",
+			target = "Lnet/minecraft/entity/Entity;horizontalSpeed:F",
+			opcode = org.objectweb.asm.Opcodes.PUTFIELD
+		)
+	)
+	private void onlyAccumulateStepDistanceOnGround(Entity instance, float value) {
+		if (this.onGround) {
+			this.horizontalSpeed = value + bufferedStepDistance;
+			flushedThisTick = bufferedStepDistance > 0f;
+			bufferedStepDistance = 0f;
+		} else {
+			bufferedStepDistance += (value - this.horizontalSpeed);
+			flushedThisTick = false;
+		}
+	}
+
+	@Inject(method = "move", at = @At("TAIL"))
+	private void catchUpStepSoundDistance(double dx, double dy, double dz, CallbackInfo ci) {
+		if (flushedThisTick) {
+			this.nextStepSoundDistance = (int) this.horizontalSpeed + 1;
+			flushedThisTick = false;
+		}
+	}
 }
